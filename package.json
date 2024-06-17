@@ -10,6 +10,7 @@
     "build": "react-scripts build"
   },
   "dependencies": {
+    "@react-ui-org/react-ui": "^0.55.1",
     "@types/node": "^16.18.97",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
