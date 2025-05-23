@@ -1,28 +1,43 @@
 import React from 'react';
 import {
-  createBrowserRouter,
-  RouterProvider,
+    Router,
+    Route,
+    createBrowserRouter, RouterProvider, Outlet,
 } from "react-router-dom";
 import { Runners } from './Runners';
 import { Team } from './Team';
+import {NavBar} from "./NavTabs";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const RootLayout = () => {
+    return (
+        <>
+            <NavBar />
+            <Outlet /> {/* This renders the current route's component */}
+        </>
+    );
+};
 
 const router = createBrowserRouter([
     {
-        path: "/tjogetlag/",
-        element: <Team />,
-    },
-    {
-        path: "/tjogetlag/team",
-        element: <Team />,
-    },
-    {
-        path: "/tjogetlag/runners",
-        element: <Runners />,
+        element: <RootLayout />, // Use RootLayout as the base
+        children: [
+            {
+                path: "/tjogetlag/",
+                element: <Team />,
+            },
+            {
+                path: "/tjogetlag/team",
+                element: <Team />,
+            },
+            {
+                path: "/tjogetlag/runners",
+                element: <Runners />,
+            },
+        ],
     },
 ]);
 
 export const App = () => {
-  return (
-     <RouterProvider router={router} />
-  );
+  return <RouterProvider router={router} />;
 }

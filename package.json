@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "homepage": "https://ejdamm.github.io/tjogetlag",
   "private": true,
+  "engines": {
+    "npm": ">=10.5.0",
+    "node": ">=20.12.1"
+  },
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
@@ -10,18 +14,20 @@
     "build": "react-scripts build"
   },
   "dependencies": {
-    "@react-ui-org/react-ui": "^0.55.1",
     "@types/node": "^16.18.97",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-scripts": "5.0.1",
+    "bootstrap": "^5.3.6",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.10.10",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.16.0",
+    "react-router-bootstrap": "^0.26.3",
+    "react-scripts": "^5.0.1",
     "typescript": "^4.9.5"
   },
   "devDependencies": {
-    "gh-pages": "^6.1.1",
-    "react-router-dom": "^6.23.1"
+    "gh-pages": "^6.3.0"
   },
   "eslintConfig": {
     "extends": [
