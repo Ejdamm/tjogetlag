@@ -6,13 +6,13 @@ export const NavBar = () => {
     return (
         <Nav variant="tabs">
             <LinkContainer to="/tjogetlag/">
-                <Nav.Link>Home</Nav.Link>
+                <Nav.Link>Start</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/tjogetlag/runners">
-                <Nav.Link>Runners</Nav.Link>
+                <Nav.Link>Löpare</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/tjogetlag/team">
-                <Nav.Link>Team</Nav.Link>
+                <Nav.Link>Lag</Nav.Link>
             </LinkContainer>
         </Nav>
     );

@@ -8,6 +8,7 @@ import { Runners } from './Runners';
 import { Team } from './Team';
 import {NavBar} from "./NavTabs";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Start} from "./Start";
 
 const RootLayout = () => {
     return (
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/tjogetlag/",
-                element: <Team />,
+                element: <Start />,
             },
             {
                 path: "/tjogetlag/team",
