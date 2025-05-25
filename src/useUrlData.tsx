@@ -1,22 +1,60 @@
 import {useNavigate, useSearchParams} from "react-router-dom";
-import {Runner} from "./types";
+import {Runner, Team} from "./types";
 
 export const useUrlData = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const runnersRaw = searchParams.get('runners') ?? '';
+    const teamsRaw = searchParams.get('teams') ?? '';
     const runners = extractRunners(runnersRaw);
+    const teams = extractTeams(teamsRaw);
+
+    const getQueryParams = () => new URLSearchParams({
+        runners: formatRunners(runners),
+        teams: formatTeams(teams)
+    });
 
     const addRunner = (runnerWithoutId: Omit<Runner, 'id'>) => {
         const runner = { ...runnerWithoutId, id: getNextId(runners) }
-        const updatedRunners = [...runners, runner];
-        const queryParams = new URLSearchParams({
-            runners: joinRunners(updatedRunners),
-        });
-        navigate(`?${queryParams.toString()}`);
+        runners.push(runner)
+        navigate(`?${getQueryParams().toString()}`);
     }
 
-    return { runners, addRunner };
+    const assignRunnerToTeam = (runnerId: number, teamIndex: number, legName: string) => {
+        teams[teamIndex].legMapping[legName] = runnerId;
+        navigate(`?${getQueryParams().toString()}`);
+    }
+
+    return { runners, teams, getQueryParams, addRunner, assignRunnerToTeam };
+}
+
+const formatTeams = (teams: Team[]): string => {
+    return teams.map(formatTeam).join(';');
+}
+
+const formatTeam = (team: Team): string => {
+    return formatLegs(team.legMapping);
+}
+
+const formatLegs = (legMapping: Team['legMapping']): string => {
+    return Object.entries(legMapping).map(([name, id]) => `${name}:${id}`).join(',');
+}
+
+const extractTeams = (teams: string): Team[] => {
+    if (!teams) {
+        return [{ legMapping: {} }];
+    }
+    return teams.split(';').map(extractTeam);
+}
+
+const extractTeam = (team: string): Team => {
+    const pairs = team.split(',');
+    const legMapping: Team['legMapping'] = {};
+    pairs.forEach((pair) => {
+        const parts = pair.split(':');
+        legMapping[parts[0]] = parseInt(parts[1]);
+    })
+    return { legMapping };
 }
 
 const getNextId = (runners: Runner[]): number => {
@@ -26,7 +64,7 @@ const getNextId = (runners: Runner[]): number => {
     return runners[runners.length - 1].id + 1;
 }
 
-const joinRunners = (runners: Runner[]): string => {
+const formatRunners = (runners: Runner[]): string => {
     return runners.map(formatRunner).join(';');
 }
 
