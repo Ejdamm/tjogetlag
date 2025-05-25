@@ -1,7 +1,5 @@
 import React from 'react';
 import {
-    Router,
-    Route,
     createBrowserRouter, RouterProvider, Outlet,
 } from "react-router-dom";
 import { Runners } from './Runners';
@@ -28,12 +26,12 @@ const router = createBrowserRouter([
                 element: <Start />,
             },
             {
-                path: "/tjogetlag/team",
-                element: <Team />,
-            },
-            {
                 path: "/tjogetlag/runners",
                 element: <Runners />,
+            },
+            {
+                path: "/tjogetlag/team",
+                element: <Team />,
             },
         ],
     },
