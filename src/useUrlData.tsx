@@ -20,12 +20,24 @@ export const useUrlData = () => {
         navigate(`?${getQueryParams().toString()}`);
     }
 
+    const updateRunner = (runner: Runner) => {
+        const index = runners.findIndex((r) => r.id === runner.id);
+        runners[index] = runner;
+        navigate(`?${getQueryParams().toString()}`);
+    }
+
+    const deleteRunner = (runnerId: number) => {
+        const index = runners.findIndex((r) => r.id === runnerId);
+        runners.splice(index, 1);
+        navigate(`?${getQueryParams().toString()}`);
+    }
+
     const assignRunnerToTeam = (runnerId: number, teamIndex: number, legName: string) => {
         teams[teamIndex].legMapping[legName] = runnerId;
         navigate(`?${getQueryParams().toString()}`);
     }
 
-    return { runners, teams, getQueryParams, addRunner, assignRunnerToTeam };
+    return { runners, teams, getQueryParams, addRunner, updateRunner, assignRunnerToTeam, deleteRunner };
 }
 
 const formatTeams = (teams: Team[]): string => {
@@ -69,7 +81,7 @@ const formatRunners = (runners: Runner[]): string => {
 }
 
 const formatRunner = (runner: Runner): string => {
-    return `${runner.id},${runner.name}`;
+    return `${runner.id},${runner.name},${runner.yearOfBirth},${runner.sex}`;
 }
 
 const extractRunners = (runners: string): Runner[] => {

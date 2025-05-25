@@ -15,7 +15,7 @@ export const Team = () => {
     return (
         <Stack gap={2}>
             {legs.map((leg) => (
-                <Stack direction="horizontal" gap={3}>
+                <Stack key={leg.name} direction="horizontal" gap={3}>
                     {leg.name}
                     <RunnerSelect leg={leg.name} selected={legMapping[leg.name]} />
                 </Stack>
