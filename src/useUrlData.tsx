@@ -81,5 +81,5 @@ const extractRunners = (runners: string): Runner[] => {
 
 const extractRunner = (runner: string): Runner => {
     const parts = runner.split(',');
-    return { id: parseInt(parts[0]), name: parts[1] };
+    return { id: parseInt(parts[0]), name: parts[1], yearOfBirth: parseInt(parts[2]), sex: parts[3] as 'M' | 'F' };
 }

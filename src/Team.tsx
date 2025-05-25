@@ -1,5 +1,6 @@
 import React from 'react';
-import {Form} from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import Stack from "react-bootstrap/Stack";
 import rulesFile from './rules.json';
 import {Rules} from "./types";
 import {useUrlData} from "./useUrlData";
@@ -12,14 +13,14 @@ export const Team = () => {
     const legMapping = team.legMapping;
 
     return (
-        <>
+        <Stack gap={2}>
             {legs.map((leg) => (
-                <>
+                <Stack direction="horizontal" gap={3}>
                     {leg.name}
                     <RunnerSelect leg={leg.name} selected={legMapping[leg.name]} />
-                </>
+                </Stack>
             ))}
-        </>
+        </Stack>
     );
 }
 

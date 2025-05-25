@@ -1,6 +1,8 @@
 export interface Runner {
     id: number;
     name: string;
+    yearOfBirth?: number;
+    sex: 'M' | 'F';
 }
 
 export interface Team {

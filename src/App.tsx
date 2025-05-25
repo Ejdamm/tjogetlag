@@ -7,12 +7,15 @@ import { Team } from './Team';
 import {NavBar} from "./NavTabs";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Start} from "./Start";
+import Container from 'react-bootstrap/Container';
 
 const RootLayout = () => {
     return (
         <>
             <NavBar />
-            <Outlet /> {/* This renders the current route's component */}
+            <Container className="pt-5">
+                <Outlet /> {/* This renders the current route's component */}
+            </Container>
         </>
     );
 };
