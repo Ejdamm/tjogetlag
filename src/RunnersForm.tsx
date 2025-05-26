@@ -103,7 +103,7 @@ export const RunnerForm: React.FC<RunnerFormProps> = ({ selectedRunner, resetSel
                     </div>
                 </Col>
                 <Col md="auto">
-                    <Button variant="primary" type="submit">
+                    <Button variant="success" type="submit">
                         {selectedRunner ? 'Uppdatera' : 'Lägg till'}
                     </Button>
                 </Col>

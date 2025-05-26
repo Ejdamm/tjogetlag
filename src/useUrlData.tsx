@@ -1,13 +1,14 @@
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {Runner, Team} from "./types";
+import {useMemo} from "react";
 
 export const useUrlData = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const runnersRaw = searchParams.get('runners') ?? '';
     const teamsRaw = searchParams.get('teams') ?? '';
-    const runners = extractRunners(runnersRaw);
-    const teams = extractTeams(teamsRaw);
+    const runners = useMemo(() => extractRunners(runnersRaw), [runnersRaw]);
+    const teams = useMemo(() => extractTeams(teamsRaw), [teamsRaw]);
 
     const getQueryParams = () => new URLSearchParams({
         runners: formatRunners(runners),
@@ -32,12 +33,18 @@ export const useUrlData = () => {
         navigate(`?${getQueryParams().toString()}`);
     }
 
-    const assignRunnerToTeam = (runnerId: number, teamIndex: number, legName: string) => {
-        teams[teamIndex].legMapping[legName] = runnerId;
+    const assignRunnerToTeam = (runnerId: number, teamId: number, legName: string) => {
+        const team = teams.find((t) => t.id === teamId);
+        team.legMapping[legName] = runnerId;
         navigate(`?${getQueryParams().toString()}`);
     }
 
-    return { runners, teams, getQueryParams, addRunner, updateRunner, assignRunnerToTeam, deleteRunner };
+    const addTeam = () => {
+        teams.push({ id: teams.length + 1, legMapping: {} })
+        navigate(`?${getQueryParams().toString()}`);
+    }
+
+    return { runners, teams, getQueryParams, addRunner, updateRunner, assignRunnerToTeam, deleteRunner, addTeam };
 }
 
 const formatTeams = (teams: Team[]): string => {
@@ -45,7 +52,11 @@ const formatTeams = (teams: Team[]): string => {
 }
 
 const formatTeam = (team: Team): string => {
-    return formatLegs(team.legMapping);
+    const formattedLegMapping = formatLegs(team.legMapping);
+    if (!formattedLegMapping) {
+        return `${team.id}`;
+    }
+    return `${team.id},${formattedLegMapping}`;
 }
 
 const formatLegs = (legMapping: Team['legMapping']): string => {
@@ -54,19 +65,20 @@ const formatLegs = (legMapping: Team['legMapping']): string => {
 
 const extractTeams = (teams: string): Team[] => {
     if (!teams) {
-        return [{ legMapping: {} }];
+        return [];
     }
     return teams.split(';').map(extractTeam);
 }
 
 const extractTeam = (team: string): Team => {
-    const pairs = team.split(',');
+    const [id, ...pairs] = team.split(',');
     const legMapping: Team['legMapping'] = {};
     pairs.forEach((pair) => {
         const parts = pair.split(':');
         legMapping[parts[0]] = parseInt(parts[1]);
     })
-    return { legMapping };
+
+    return { id: parseInt(id), legMapping };
 }
 
 const getNextId = (runners: Runner[]): number => {

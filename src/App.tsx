@@ -33,7 +33,7 @@ const router = createBrowserRouter([
                 element: <Runners />,
             },
             {
-                path: "/tjogetlag/team",
+                path: "/tjogetlag/team/:teamId",
                 element: <Team />,
             },
         ],

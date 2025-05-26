@@ -1,13 +1,11 @@
 import React from 'react';
+import Button from "react-bootstrap/Button";
+import {useUrlData} from "./useUrlData";
 
 export const Start = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-            Start!
-        </p>
-      </header>
-    </div>
+    const { addTeam } = useUrlData();
+
+    return (
+      <Button variant="success" onClick={() => addTeam()}>Lägg till lag</Button>
   );
 }

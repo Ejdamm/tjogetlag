@@ -4,7 +4,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import {useUrlData} from "./useUrlData";
 
 export const NavBar = () => {
-    const { getQueryParams } = useUrlData();
+    const { getQueryParams, teams } = useUrlData();
     return (
         <Nav variant="tabs">
             <LinkContainer to={{ pathname: '/tjogetlag/', search: getQueryParams().toString() }}>
@@ -13,9 +13,11 @@ export const NavBar = () => {
             <LinkContainer to={{ pathname: '/tjogetlag/runners', search: getQueryParams().toString() }}>
                 <Nav.Link>Löpare</Nav.Link>
             </LinkContainer>
-            <LinkContainer to={{ pathname: '/tjogetlag/team', search: getQueryParams().toString() }}>
-                <Nav.Link>Lag</Nav.Link>
-            </LinkContainer>
+            {teams.map((team) => (
+                <LinkContainer key={team.id} to={{ pathname: `/tjogetlag/team/${team.id}`, search: getQueryParams().toString() }}>
+                    <Nav.Link>{`Lag ${team.id}`}</Nav.Link>
+                </LinkContainer>
+            ))}
         </Nav>
     );
 }

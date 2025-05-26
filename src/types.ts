@@ -6,6 +6,7 @@ export interface Runner {
 }
 
 export interface Team {
+    id: number;
     legMapping: Record<Leg['name'], Runner['id']>;
 }
 
