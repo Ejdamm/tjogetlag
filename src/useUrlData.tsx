@@ -16,7 +16,7 @@ export const useUrlData = () => {
     });
 
     const addRunner = (runnerWithoutId: Omit<Runner, 'id'>) => {
-        const runner = { ...runnerWithoutId, id: getNextId(runners) }
+        const runner = { ...runnerWithoutId, id: getNextRunnerId(runners) }
         runners.push(runner)
         navigate(`?${getQueryParams().toString()}`);
     }
@@ -40,11 +40,17 @@ export const useUrlData = () => {
     }
 
     const addTeam = () => {
-        teams.push({ id: teams.length + 1, legMapping: {} })
+        teams.push({ id: getNextTeamId(teams), legMapping: {} })
         navigate(`?${getQueryParams().toString()}`);
     }
 
-    return { runners, teams, getQueryParams, addRunner, updateRunner, assignRunnerToTeam, deleteRunner, addTeam };
+    const deleteTeam = (teamId: number) => {
+        const index = teams.findIndex((t) => t.id === teamId);
+        teams.splice(index, 1);
+        navigate(`/tjogetlag/?${getQueryParams().toString()}`);
+    }
+
+    return { runners, teams, getQueryParams, addRunner, updateRunner, assignRunnerToTeam, deleteRunner, addTeam, deleteTeam };
 }
 
 const formatTeams = (teams: Team[]): string => {
@@ -81,11 +87,18 @@ const extractTeam = (team: string): Team => {
     return { id: parseInt(id), legMapping };
 }
 
-const getNextId = (runners: Runner[]): number => {
+const getNextRunnerId = (runners: Runner[]): number => {
     if (runners.length === 0) {
         return 1;
     }
     return runners[runners.length - 1].id + 1;
+}
+
+const getNextTeamId = (teams: Team[]): number => {
+    if (teams.length === 0) {
+        return 1;
+    }
+    return teams[teams.length - 1].id + 1;
 }
 
 const formatRunners = (runners: Runner[]): string => {

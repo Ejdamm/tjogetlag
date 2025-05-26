@@ -13,9 +13,9 @@ export const NavBar = () => {
             <LinkContainer to={{ pathname: '/tjogetlag/runners', search: getQueryParams().toString() }}>
                 <Nav.Link>Löpare</Nav.Link>
             </LinkContainer>
-            {teams.map((team) => (
+            {teams.map((team, index) => (
                 <LinkContainer key={team.id} to={{ pathname: `/tjogetlag/team/${team.id}`, search: getQueryParams().toString() }}>
-                    <Nav.Link>{`Lag ${team.id}`}</Nav.Link>
+                    <Nav.Link>{`Lag ${index + 1}`}</Nav.Link>
                 </LinkContainer>
             ))}
         </Nav>
