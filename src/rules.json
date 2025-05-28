@@ -1,5 +1,17 @@
 {
   "version": "Tjoget 2025",
+  "limits": [
+    {
+      "sex": "F",
+      "minCount": 5
+    },
+    {
+      "sex": "M",
+      "maxCount": 9,
+      "minAge": 17,
+      "maxAge": 44
+    }
+  ],
   "legs": [
     {
       "name": "1"
@@ -8,7 +20,20 @@
       "name": "2"
     },
     {
-      "name": "3"
+      "name": "3",
+      "extra": 2,
+      "limits": [
+        {
+          "sex": "F",
+          "minAge": 50,
+          "maxAge": 14
+        },
+        {
+          "sex": "M",
+          "minAge": 60,
+          "maxAge": 14
+        }
+      ]
     },
     {
       "name": "4"
@@ -17,7 +42,10 @@
       "name": "5"
     },
     {
-      "name": "6"
+      "name": "6",
+      "limits": [{
+        "sex": "F"
+      }]
     },
     {
       "name": "7"
@@ -41,10 +69,14 @@
       "name": "13"
     },
     {
-      "name": "14"
+      "name": "14",
+      "extra": 2
     },
     {
-      "name": "15"
+      "name": "15",
+      "limits": [{
+        "sex": "F"
+      }]
     },
     {
       "name": "16"
@@ -59,7 +91,10 @@
       "name": "19"
     },
     {
-      "name": "20"
+      "name": "20",
+      "limits": [{
+        "sex": "F"
+      }]
     }
   ]
 }

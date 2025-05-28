@@ -3,7 +3,7 @@ import {
     createBrowserRouter, RouterProvider, Outlet,
 } from "react-router-dom";
 import { Runners } from './Runners';
-import { Team } from './Team';
+import { TeamBuilder } from './TeamBuilder';
 import {NavBar} from "./NavTabs";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Start} from "./Start";
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/tjogetlag/team/:teamId",
-                element: <Team />,
+                element: <TeamBuilder />,
             },
         ],
     },

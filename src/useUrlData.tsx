@@ -35,7 +35,11 @@ export const useUrlData = () => {
 
     const assignRunnerToTeam = (runnerId: number, teamId: number, legName: string) => {
         const team = teams.find((t) => t.id === teamId);
-        team.legMapping[legName] = runnerId;
+        if (runnerId === -1) {
+            delete team.legMapping[legName];
+        } else {
+            team.legMapping[legName] = runnerId;
+        }
         navigate(`?${getQueryParams().toString()}`);
     }
 
