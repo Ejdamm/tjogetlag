@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/tjogetlag/static/css/main.964fdded.css",
-    "main.js": "/tjogetlag/static/js/main.660db5af.js",
+    "main.css": "/tjogetlag/static/css/main.9d0934b1.css",
+    "main.js": "/tjogetlag/static/js/main.d0c89426.js",
     "index.html": "/tjogetlag/index.html",
-    "main.964fdded.css.map": "/tjogetlag/static/css/main.964fdded.css.map",
-    "main.660db5af.js.map": "/tjogetlag/static/js/main.660db5af.js.map"
+    "main.9d0934b1.css.map": "/tjogetlag/static/css/main.9d0934b1.css.map",
+    "main.d0c89426.js.map": "/tjogetlag/static/js/main.d0c89426.js.map"
   },
   "entrypoints": [
-    "static/css/main.964fdded.css",
-    "static/js/main.660db5af.js"
+    "static/css/main.9d0934b1.css",
+    "static/js/main.d0c89426.js"
   ]
 }
