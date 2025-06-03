@@ -51,7 +51,7 @@ export const useUrlData = () => {
     const deleteTeam = (teamId: number) => {
         const index = teams.findIndex((t) => t.id === teamId);
         teams.splice(index, 1);
-        navigate(`/tjogetlag/?${getQueryParams().toString()}`);
+        navigate(`/?${getQueryParams().toString()}`);
     }
 
     return { runners, teams, getQueryParams, addRunner, updateRunner, assignRunnerToTeam, deleteRunner, addTeam, deleteTeam };

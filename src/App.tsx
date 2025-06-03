@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    createBrowserRouter, RouterProvider, Outlet,
+    createHashRouter, RouterProvider, Outlet,
 } from "react-router-dom";
 import { Runners } from './Runners';
 import { TeamBuilder } from './TeamBuilder';
@@ -20,20 +20,20 @@ const RootLayout = () => {
     );
 };
 
-const router = createBrowserRouter([
+const router = createHashRouter([
     {
         element: <RootLayout />, // Use RootLayout as the base
         children: [
             {
-                path: "/tjogetlag/",
+                path: "/",
                 element: <Start />,
             },
             {
-                path: "/tjogetlag/runners",
+                path: "runners",
                 element: <Runners />,
             },
             {
-                path: "/tjogetlag/team/:teamId",
+                path: "team/:teamId",
                 element: <TeamBuilder />,
             },
         ],

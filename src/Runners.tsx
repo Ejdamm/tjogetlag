@@ -93,16 +93,12 @@ const MaleIcon = (
 );
 
 const getTeams = (runnerId: number, teams: Team[]): string => {
-    let appointedTeams = '';
-    teams.forEach((team) => {
-        const index = Object.values(team.legMapping).findIndex((value) => value === runnerId);
-        if (index !== -1) {
-            if (appointedTeams.length > 0) {
-                appointedTeams += ', ';
+    return teams.reduce((assignedTeams, team, index) => {
+        Object.entries(team.legMapping).forEach(([key, value]) => {
+            if (value === runnerId) {
+                assignedTeams.push(`Lag ${index + 1} (str ${key})`);
             }
-            appointedTeams += `Lag ${teams.indexOf(team) + 1} (str ${Object.keys(team.legMapping)[index]})`;
-        }
-    })
-    return appointedTeams;
-}
-
+        });
+        return assignedTeams;
+    }, [] as string[]).join(', ');
+};
